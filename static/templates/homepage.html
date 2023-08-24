@@ -1,0 +1,51 @@
+<head>
+</head>
+<body>
+<h1>
+	Simple Notepad Webapp
+</h1>
+
+<textarea id="note">Insert Text Here</textarea>
+<br></br>
+<button id="submitNote">Submit Note</button>
+
+<script>
+document.getElementById("submitNote").onclick = function() {postNote()};
+
+function postNote() {
+  note = document.getElementById("note");
+  fetch('/note', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ "str_data": note.value })
+})
+}
+</script>
+
+<br></br>
+<textarea id="query">Submit Query Here</textarea>
+<br></br>
+<button id="submitQuery">Submit Query</button>
+
+<script>
+document.getElementById("submitQuery").onclick = function() {searchNotes()};
+
+function searchNotes() {
+  note = document.getElementById("query");
+  fetch('/search', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ "str_data": query.value })
+})
+	window.location.href = "/browse/0";
+}
+
+</script>
+
+</body>
